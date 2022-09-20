@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('log_information', function (Blueprint $table) {
             $table->id();
+            $table->integer('userid')->nullable();
             $table->string('name')->nullable();
             $table->string('gender')->nullable();
             $table->string('contactNumber')->nullable();

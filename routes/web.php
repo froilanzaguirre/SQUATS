@@ -74,3 +74,5 @@ Route::group(['middleware' => 'auth'], function(){
 // });
 
 Route::get('/user/{id}', [App\Http\Controllers\ScannerController::class, 'storeLogInfo']);
+
+Route::get('loginformation', [App\Http\Controllers\LogInformationController::class, 'show'])->name('loginformation');

@@ -5,6 +5,12 @@
             ') }}
         </h2>
 
+        <div class="popup">
+            <div class="popupcontent">
+
+            </div>
+        </div>
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex items-center justify-center mt-4">
@@ -62,7 +68,7 @@
         @csrf
             <div class="mt-4">
                 <x-jet-label for="dateOfVisit" value="{{ __('Date of Visit') }}" />
-                <x-jet-input id="dateOfVisit" class="block mt-1 w-full" type="date" name="dateOfVisit" />
+                <x-jet-input id="dateOfVisit" class="block mt-1 w-full" type="date" name="dateOfVisit" required/>
             </div>
 
             <div class="mt-4">
@@ -70,11 +76,14 @@
                 <x-jet-input id="purposeOfVisit" class="block mt-1 w-full" type="text" name="purposeOfVisit" :value="old('purposeOfVisit')" required />
             </div>
             <div class="flex items-center justify-center mt-4">
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4" >
                     {{ __('Generate QR code') }}
                 </x-jet-button>
             </div>
         </form>
+
+        <style>
+        </style>
 
     </x-slot>
 </x-app-layout>
