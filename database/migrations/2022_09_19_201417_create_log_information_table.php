@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('contactNumber')->nullable();
             $table->string('dateOfVisit')->nullable();
             $table->string('purposeOfVisit')->nullable();
+            $table->string('nameToVisit')->nullable();
+            $table->string('roomToVisit')->nullable();
             $table->string('vaxinfo')->nullable();
             $table->timestamp('timein')->nullable();
             $table->timestamp('timeout')->nullable();

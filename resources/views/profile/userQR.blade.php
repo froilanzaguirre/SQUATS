@@ -1,3 +1,27 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+    .popup{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popupcontent{
+        height: 550px;
+        width: 500px;
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        position: relative;
+        border: 3px solid black;
+    }
+</style>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -5,46 +29,7 @@
             ') }}
         </h2>
 
-        <div class="popup">
-            <div class="popupcontent">
-
-            </div>
-        </div>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex items-center justify-center mt-4">
-                    <div class="visible-print text-center">
-                        <x-jet-label value="{{ __('User QR Code') }}" />
-                        {{-- {!! QrCode::size(350)->generate(
-                            "Name: " . Auth::user()->fname . " " . Auth:: user()->lname . "\n" .
-                            "Email: " . Auth::user()->email . "\n" .
-                            "Address: " . Auth::user()->city . "\n" .
-                            "Gender: " . Auth::user()->gender . "\n" .
-                            "Contact Number: " . Auth::user()->contactNumber . "\n" .
-                            "Date of Visit: " . Auth::user()->dateOfVisit . "\n" .
-                            "Purpose of Visit: " . Auth::user()->purposeOfVisit . "\n" 
-                            ); !!} --}}
-                            {!! QrCode::size(300)->generate(
-                                "http://127.0.0.1:8000/user/" . Auth::user()->id
-                                ); !!}
-                    </div>
-                </div>
-
-                <!-- Name -->
-                <div class="flex items-center justify-center mt-4">
-                    {{ Auth::user()->fname }}
-                </div>
-                
-                <!-- Buttons -->
-                <div class="flex items-center justify-center mt-4">
-                    <x-jet-button class="ml-4">
-                        {{ __('Download QR code') }}
-                    </x-jet-button>
-                </div>
-            </div>
-        </div>
-
+        {{-- User Info --}}
         User info
         <div class="row">
             Name : {{ Auth::user()->fname }}
@@ -62,8 +47,6 @@
             Contact Number : {{ Auth::user()->contactNumber }}
         </div>
 
-        
-
         <form method="POST" action="{{ route('userQR.post') }}" enctype="multipart/form-data">
         @csrf
             <div class="mt-4">
@@ -75,15 +58,66 @@
                 <x-jet-label for="purposeOfVisit" value="{{ __('Purpose of Visit') }}" />
                 <x-jet-input id="purposeOfVisit" class="block mt-1 w-full" type="text" name="purposeOfVisit" :value="old('purposeOfVisit')" required />
             </div>
+            
+            <div class="mt-4">
+                <x-jet-label for="nameToVisit" value="{{ __('Name of Room Owner') }}" />
+                <x-jet-input id="nameToVisit" class="block mt-1 w-full" type="text" name="nameToVisit" :value="old('nameToVisit')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="roomToVisit" value="{{ __('Room Number of Visit') }}" />
+                <x-jet-input id="roomToVisit" class="block mt-1 w-full" type="text" name="roomToVisit" :value="old('roomToVisit')" required />
+            </div>
+
             <div class="flex items-center justify-center mt-4">
-                <x-jet-button class="ml-4" >
+                <x-jet-button class="ml-4" id="button" >
                     {{ __('Generate QR code') }}
                 </x-jet-button>
             </div>
         </form>
 
-        <style>
-        </style>
+        {{-- Popup --}}
+        <div class="popup">
+            <div class="popupcontent">
+                <div class="py-12">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="flex items-center justify-center mt-4">
+                            <div class="visible-print text-center">
+                                <x-jet-label value="{{ __('User QR Code') }}" />
+                                    {!! QrCode::size(300)->generate(
+                                        "http://127.0.0.1:8000/user/" . Auth::user()->id
+                                        ); !!}
+                            </div>
+                        </div>
+
+                        <!-- Name -->
+                        <div class="flex items-center justify-center mt-4">
+                            {{ Auth::user()->fname }}
+                        </div>
+                        
+                        <!-- Buttons -->
+                        <div class="flex items-center justify-center mt-4">
+                            <x-jet-button class="ml-4">
+                                {{ __('Download QR code') }}
+                            </x-jet-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if(session()->has('success'))
+            
+            <script>
+                document.querySelector(".popup").style.display = "flex";
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'QR Code Generated'
+                })
+            </script>
+        @endif
 
     </x-slot>
 </x-app-layout>
+

@@ -19,6 +19,8 @@
                     <th>Contact Number</th>
                     <th>Date of Visit</th>
                     <th>Purpose</th>
+                    <th>Name of Room Owner To Visit</th>
+                    <th>Room to Visit</th>
                     <th>Time In</th>
                     <th>Time Out</th>
                 </tr>
@@ -32,6 +34,8 @@
                     <td>{{ $loginfo->contactNumber }}</td>
                     <td>{{ $loginfo->dateOfVisit }}</td>
                     <td>{{ $loginfo->purposeOfVisit }}</td>
+                    <td>{{ $loginfo->nameToVisit }}</td>
+                    <td>{{ $loginfo->roomToVisit }}</td>
                     <td>{{ $loginfo->created_at }}</td>
                     <td>{{ $loginfo->timeout }}</td>
                   </tr>

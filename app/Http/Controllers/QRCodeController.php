@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 
 class QRCodeController extends Controller
 {
@@ -16,8 +17,10 @@ class QRCodeController extends Controller
         auth()->user()->update([
             'dateOfVisit' => $request->dateOfVisit,
             'purposeOfVisit' => $request->purposeOfVisit,
+            'nameToVisit' => $request->nameToVisit,
+            'roomToVisit' => $request->roomToVisit,
         ]);
 
-        return redirect()->route('userQR');
+        return back()->with('success', '');
     }
 }

@@ -32,6 +32,8 @@ return new class extends Migration
             $table->string('vaccine')->nullable();
             $table->date('dateOfVisit')->nullable();
             $table->string('purposeOfVisit')->nullable();
+            $table->string('nameToVisit')->nullable();
+            $table->string('roomToVisit')->nullable();
         });
     }
 

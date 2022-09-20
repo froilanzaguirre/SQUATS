@@ -17,8 +17,10 @@ class ScannerController extends Controller
         $loginformation->contactNumber = $user->contactNumber;
         $loginformation->dateOfVisit = $user->dateOfVisit;
         $loginformation->purposeOfVisit = $user->purposeOfVisit;
+        $loginformation->nameToVisit = $user->nameToVisit;
+        $loginformation->roomToVisit = $user->roomToVisit;
 
         $loginformation->save();
-        return redirect()->route('userQR');
+        return redirect()->route('loginformation');
     }
 }

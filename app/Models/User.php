@@ -48,6 +48,8 @@ class User extends Authenticatable
         'vaccine',
         'dateOfVisit',
         'purposeOfVisit',
+        'nameToVisit',
+        'roomToVisit',
     ];
 
     /**
