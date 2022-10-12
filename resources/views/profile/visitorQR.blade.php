@@ -2,13 +2,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
 <style>
-    .container{
-        position: relative;
-    }
     .container .popup{
-        height: 30%;
+        height: 50%;
         width: 52%;
-        top: 350px;
+        top: 180px;
         right:  380px;
         justify-content: center;
         align-items: center;
@@ -17,9 +14,9 @@
         z-index: 7;
     }
     .container .popup:after{
-        height: 30%;
+        height: 50%;
         width: 52%;
-        top: 350px;
+        top: 180px;
         right: 380px;
         justify-content: center;
         align-items: center;
@@ -45,7 +42,7 @@
     }
     .top-container{
         width: 100vw;
-        height: 100vh;
+        height: 83.4vh;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap:15.2rem;
@@ -64,7 +61,6 @@
         width: 500px;
     }
     .left-container {
-        margin-top:15px;
         position: absolute;
         top: 45%;
         transform: translate(-50%, -50%);
@@ -72,6 +68,8 @@
         width: 50%;
         transition: 1s 0.7s ease-in-out;
         display: grid;
+        grid-template-columns: 1fr;
+        z-index: 5;
     }
     .left-form {
         display: flex;
@@ -112,7 +110,7 @@
     .btn{
         background-color:blue;
         color:white;    
-        margin-left:5px;
+        margin-left:10px;
         width: 153px;
         height: 30px;
     }
@@ -120,14 +118,14 @@
         background-color:#1988D1;
    }
     .input-box{
-        margin-bottom: 1px;
+        margin-bottom: 2px;
         width: 650px;
-        height:30px;
+        height:40px;
     }
     .details{
         display: block;
         font-weight: 900;
-        margin-bottom: 1px;
+        margin-bottom: 3px;
         font-size: 1rem;
     }
     .name{
@@ -137,12 +135,12 @@
         justify-content: flex-end;
         align-items: center;
         font-weight: 900;
-        margin-bottom: 2px;
+        margin-bottom: 5px;
     }    
 </style>
 
-<x-guest-layout>
-    
+<x-app-layout>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Visitor Request') }}
@@ -165,11 +163,11 @@
                     <!-- QR Code -->
                     <div class="flex items-center justify-center mt-4">
                         <div class="visible-print text-center">
-                                {!! QrCode::size(320)->generate("http://127.0.0.1:8000/user/" . 1); !!}
+                                {!! QrCode::size(320)->generate("http://127.0.0.1:8000/user/" . Auth::user()->id); !!}
                         </div>
                     </div>
 
-                    {{-- <div class="flex items-center justify-center">
+                    <div class="flex items-center justify-center">
                     <!-- Name -->
                     <div class="name">
                         
@@ -183,7 +181,7 @@
                     <div class="name">
                         {{ Auth::user()->usertype }}
                     </div>
-                    </div> --}}
+                    </div>
                     <!-- Buttons -->
                     <div class="flex items-center justify-center mt-4">
                         <x-jet-button class="ml-4" id="downloadQR">
@@ -200,6 +198,26 @@
             </div>
         </div>
         </div>
+
+        @if(session()->has('success'))
+            
+            <script>
+                document.querySelector(".popup").style.display = "flex";
+
+                Swal.fire({
+                icon: 'success',
+                title: 'QR Code has been Generated',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            </script>
+        @endif
+
+        <script>
+            document.getElementByID("downloadQR").addEventListener("click", function(){
+                location.href="https://www.facebook.com";
+            })
+        </script>
            
     <div class="top-container">
 		<div class="img">
@@ -212,84 +230,62 @@
           <br><br><br>
 
     {{-- User Info --}}
-    <h2 class="name">Visitor Request Form</h2>          
+    <h2 class="name">Visitor Request Form</h2>  
+        <div class="row">
+            Name : {{ Auth::user()->fname }}
+                    {{ Auth::user()->mname }}
+                    {{ Auth::user()->lname }}
+        </div>
+        <div class="row">
+            Email : {{ Auth::user()->email }}
+        </div>
+        <div class="row">
+            Address : {{ Auth::user()->city }}
+        </div>
+        <div class="row">
+            Gender : {{ Auth::user()->gender }}
+        </div>
+        <div class="row">
+            Contact Number : {{ Auth::user()->contactNumber }}
+        </div>
+        
 
-    <form method="POST" action="{{ route('userQR.post') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('userQR.post') }}" enctype="multipart/form-data">
         @csrf
             <div class="mt-4">
-                <x-jet-label for="name" class="details" value="{{ __('Full Name') }}" />
-                <x-jet-input id="name" class="input-box" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-jet-label for="dateOfVisit" class="details" value="{{ __('Date of Visit') }}" />
+                <x-jet-input id="dateOfVisit"  class="input-box" type="date" name="dateOfVisit" required/>
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="email" class="details" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="input-box" type="email" name="email" :value="old('email')" required />
-            </div>
-            
-            <div class="block mt-4">
-                <x-jet-label for="gender" class="details" value="{{ __('Gender') }}" />
-                <input type="radio" name="gender" value="Male" checked>
-                <label for="gender">Male</label>
-                <input class="ml-1" type="radio" name="gender" value="Female">
-                <label for="gender">Female</label>
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="contactNumber" class="details" value="{{ __('Contact Number') }}" />
-                <x-jet-input id="contactNumber" class="input-box" type="text" name="contactNumber" />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="dateOfVisit" value="{{ __('Date of Visit') }}" />
-                <x-jet-input id="dateOfVisit" class="input-box" type="date" name="dateOfVisit" required/>
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="purposeOfVisit" value="{{ __('Purpose of Visit') }}" />
-                <x-jet-input id="purposeOfVisit" class="input-box" type="text" name="purposeOfVisit" :value="old('purposeOfVisit')" required />
+                <x-jet-label for="purposeOfVisit" class="details" value="{{ __('Purpose of Visit') }}" />
+                <x-jet-input id="purposeOfVisit"  class="input-box" type="text" name="purposeOfVisit" :value="old('purposeOfVisit')" required />
             </div>
             
             <div class="mt-4">
-                <x-jet-label for="nameToVisit" value="{{ __('Name of Room Owner') }}" />
-                <x-jet-input id="nameToVisit" class="input-box" type="text" name="nameToVisit" :value="old('nameToVisit')" required />
+                <x-jet-label for="nameToVisit" class="details" value="{{ __('Name of Room Owner') }}" />
+                <x-jet-input id="nameToVisit"  class="input-box" type="text" name="nameToVisit" :value="old('nameToVisit')" required />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="roomToVisit" value="{{ __('Room Number of Visit') }}" />
-                <x-jet-input id="roomToVisit" class="input-box" type="text" name="roomToVisit" :value="old('roomToVisit')" required />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="vaccine" class="details" value="{{ __('Vaccination Card') }}" />
-                <x-jet-input id="vaccine" class="input-box" type="file" name="vaccine" required />
+                <x-jet-label for="roomToVisit" class="details" value="{{ __('Room Number of Visit') }}" />
+                <x-jet-input id="roomToVisit"  class="input-box" type="text" name="roomToVisit" :value="old('roomToVisit')" required />
             </div>
 
             <div class="flex items-center justify-center mt-4">
-                <x-jet-button class="ml-4" id="generate" >
+                <x-jet-button class="btn" id="generate" >
                     {{ __('Generate QR code') }}
                 </x-jet-button>
             </div>
         </form>
+
+
+         
 		</div>
 
-        </div>
-        </div>
-    </div>
-</body>  
+        
+     
+        
     
-</x-guest-layout>
+</x-app-layout>
 
-
-@if(session()->has('generated'))
-    
-    <script>
-        document.querySelector(".popup").style.display = "flex";
-
-        Swal.fire({
-        icon: 'success',
-        title: 'QR Code has been Generated',
-        showConfirmButton: false,
-        timer: 1500
-        })
-    </script>
-@endif

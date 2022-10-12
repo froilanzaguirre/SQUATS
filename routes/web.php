@@ -29,17 +29,30 @@ Route::middleware([
 
 
 //User QR Code
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/userQR', function () {
-        return view('profile.userQR');
-    })->name('userQR');
-    Route::post('userQR', [App\Http\Controllers\QRCodeController::class, 'store'])
-    ->name('userQR.post');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/userQR', function () {
+//         return view('profile.userQR');
+//     })->name('userQR');
+//     Route::post('userQR', [App\Http\Controllers\QRCodeController::class, 'store'])
+//     ->name('userQR.post');
+// });
+
+//New User QR
+Route::get('/userQR', function () {
+    return view('profile.userQR');
+})->name('userQR');
+Route::post('userQR', [App\Http\Controllers\QRCodeController::class, 'store'])
+->name('userQR.post');
+
+Route::get('/visitorQR', function () {
+    return view('profile.visitorQR');
+})->name('visitorQR');
+Route::post('visitorQR', [App\Http\Controllers\QRCodeController::class, 'store'])
+->name('visitorQR.post');
 
 Route::middleware([
     'auth:sanctum',

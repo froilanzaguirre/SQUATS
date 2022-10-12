@@ -35,7 +35,7 @@ class CreateNewUser implements CreatesNewUsers
         redirect()->route('register-step2.create');
 
         return User::create([
-            'usertype' => $input['usertype'],
+            'usertype' => 'usertype',
             'suffix' => $input['suffix'],
             'fname' => $input['fname'],
             'mname' => $input['mname'],

@@ -52,13 +52,47 @@
             </div>
         @endif
 
-        <!-- Name -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Name') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
-            <x-jet-input-error for="name" class="mt-2" />
+     <!-- First Name -->
+   
+     <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="fname" value="{{ __('First Name') }}" />
+            <x-jet-input id="fname" type="text" class="mt-1 block w-full" wire:model.defer="state.fname" autocomplete="fname" />
+            <x-jet-input-error for="fname" class="mt-2" />
         </div>
-
+        <!-- Middle Name -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="mname" value="{{ __('Middle Name') }}" />
+            <x-jet-input id="mname" type="text" class="mt-1 block w-full" wire:model.defer="state.mname" autocomplete="mname" />
+            <x-jet-input-error for="mname" class="mt-2" />
+        </div>
+        <!--Last Name -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="lname" value="{{ __('Last Name') }}" />
+            <x-jet-input id="lname" type="text" class="mt-1 block w-full" wire:model.defer="state.lname" autocomplete="lname" />
+            <x-jet-input-error for="lname" class="mt-2" />
+        </div>
+        <!--Civil Status -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="civilStatus" value="{{ __('Civil Status') }}" />
+           <select name="civilStatus" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model.defer="state.civilStatus">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widowed">Widowed</option>
+            </select>
+        </div>
+         <!--Gender -->
+         <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="gender" value="{{ __('Gender') }}" />
+            <x-jet-input id="gender" type="text" class="mt-1 block w-full" wire:model.defer="state.gender" autocomplete="gender" disabled="true" />
+            <x-jet-input-error for="gender" class="mt-2" />
+        </div>
+        <!-- Birthdate -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="birthDate" value="{{ __('Birthdate') }}" />
+            <x-jet-input id="birthDate" type="birthDate" class="mt-1 block w-full" wire:model.defer="state.birthDate" />
+            <x-jet-input-error for="birthDate" class="mt-2" />
+        </div>    
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Email') }}" />

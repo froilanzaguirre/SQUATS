@@ -12,7 +12,7 @@ class ScannerController extends Controller
         $user = User::find($id);
         $loginformation = new LogInformation();
         $loginformation->userid = $user->id;
-        $loginformation->name = $user->fname . " " . $user->mname. " " . $user->lname;
+        $loginformation->name = $user->name;
         $loginformation->gender = $user->gender;
         $loginformation->contactNumber = $user->contactNumber;
         $loginformation->dateOfVisit = $user->dateOfVisit;
