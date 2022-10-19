@@ -182,7 +182,7 @@
                         @if (Route::has('register'))
                         <h2>Sign up for a SQUATS account</h2>
                             <a href="{{ route('register') }}" class="btn solid text-center text-lg">Register Here</a>
-                            <a href="{{ route('userQR') }}" class="btn solid text-center text-lg">Just Visiting</a>
+                            <a href="{{ route('userQR.create') }}" class="btn solid text-center text-lg">Just Visiting</a>
                         @endif
                     @endauth
                 </div>

@@ -10,36 +10,34 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                </div>-->
                 
                 @if(Auth::user()->usertype === 'Visitor')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('userQR') }}" :active="request()->routeIs('userQR')">
+                        {{ __('Visitor QR') }}
+                    </x-jet-nav-link>
+                </div>
+
+                @elseif(Auth::user()->usertype === 'Resident')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('visitorRequest') }}" :active="request()->routeIs('visitorRequest')">
                         {{ __('Visitor Request') }}
                     </x-jet-nav-link>
                 </div>
 
-                <!--@elseif(Auth::user()->usertype === 'Resident')
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('visitorQR') }}" :active="request()->routeIs('visitorQR')">
-                        {{ __('Visitor Request') }}
-                    </x-jet-nav-link>
-                </div>-->
-
-                @elseif(Auth::user()->usertype === 'usertype')
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('userQR') }}" :active="request()->routeIs('userQR')">
-                        {{ __('Visitor Request') }}
-                    </x-jet-nav-link>
-                </div>
+                @elseif(Auth::user()->usertype === 'Admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('scanQR') }}" :active="request()->routeIs('scanQR')">
                         {{ __('QR Code Scanner') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('expectedVisitor') }}" :active="request()->routeIs('expectedVisitor')">
+                        {{ __('Expected Visitors') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -175,7 +173,7 @@
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('userQR') }}" :active="request()->routeIs('userQR')">
+            <x-jet-responsive-nav-link href="{{ route('userQR.create') }}" :active="request()->routeIs('userQR')">
                 {{ __('User Information') }}
             </x-jet-responsive-nav-link>
         </div>

@@ -165,7 +165,7 @@
                     <!-- QR Code -->
                     <div class="flex items-center justify-center mt-4">
                         <div class="visible-print text-center">
-                                {!! QrCode::size(320)->generate("http://127.0.0.1:8000/user/" . $qrid); !!}
+                                {!! QrCode::size(320)->generate("http://127.0.0.1:8000/user/" . 1); !!}
                         </div>
                     </div>
 
@@ -212,8 +212,7 @@
           <br><br><br>
 
     {{-- User Info --}}
-    <h2 class="name">Visitor Request Form</h2> 
-
+    <h2 class="name">Visitor Request Form</h2>          
 
     <form method="POST" action="{{ route('userQR.post') }}" enctype="multipart/form-data">
         @csrf

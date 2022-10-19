@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Session;
 
 class QRCodeController extends Controller
 {
+
     public function create()
     {
-        return view('profile.userQR');
+        $users_id = DB::table('users')->latest()->first();
+        
+        return view('profile.userQR', ['qrid' => $users_id->id]);
     }
 
     public function store(Request $request, User $user)
@@ -32,7 +36,9 @@ class QRCodeController extends Controller
             $user->update(['vaccine' => ('vaccines' . '\user.' . $user->id . '\vaccine.' . $vaccine)]);
         }
 
-        return back()->with('generated', '');
+        return back()->with('generated', ['qrid' => $user->id]);
+        
+        // return back()->with('generated', '');
     }
 
     public function downloadQR(){
@@ -40,4 +46,14 @@ class QRCodeController extends Controller
         return redirect()->route('userQR');
         
     }
+
+    public function getQRID($id){
+        $user = User::find($id);
+
+        $qrID->userID = $data->id;
+
+        return back()->with('generated', '');
+        // return back()->with('generated', compact('qrID'))
+    }
+
 }

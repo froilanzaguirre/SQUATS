@@ -42,17 +42,22 @@ Route::middleware([
 // });
 
 //New User QR
-Route::get('/userQR', function () {
-    return view('profile.userQR');
-})->name('userQR');
-Route::post('userQR', [App\Http\Controllers\QRCodeController::class, 'store'])
-->name('userQR.post');
 
+Route::get('userQR', [App\Http\Controllers\QRCodeController::class, 'create'])->name('userQR.create');
+Route::post('userQR', [App\Http\Controllers\QRCodeController::class, 'store'])->name('userQR.post');
+
+//Visitor QR
 Route::get('/visitorQR', function () {
     return view('profile.visitorQR');
 })->name('visitorQR');
-Route::post('visitorQR', [App\Http\Controllers\QRCodeController::class, 'store'])
+Route::post('visitorQR', [App\Http\Controllers\VisitorQRController::class, 'newVisitor'])
 ->name('visitorQR.post');
+
+Route::get('/visitorRequest', function () {
+    return view('visitorRequest');
+})->name('visitorRequest');
+Route::post('visitorRequest', [App\Http\Controllers\VisitorRequestController::class, 'createVisitor'])
+->name('visitorRequest.post');
 
 Route::middleware([
     'auth:sanctum',
@@ -87,5 +92,5 @@ Route::group(['middleware' => 'auth'], function(){
 // });
 
 Route::get('/user/{id}', [App\Http\Controllers\ScannerController::class, 'storeLogInfo']);
-
 Route::get('loginformation', [App\Http\Controllers\LogInformationController::class, 'show'])->name('loginformation');
+Route::get('expectedVisitor', [App\Http\Controllers\ExpectedVisitorController::class, 'show'])->name('expectedVisitor');

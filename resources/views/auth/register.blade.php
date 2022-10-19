@@ -127,8 +127,9 @@
 
             <div>
                 <x-jet-label for="usertype" class="details" value="{{ __('Type') }}"/>
-                <select name="usertype" class="input-box" disabled>
+                <select name="usertype" class="input-box">
                     <option value="Resident">Resident</option>
+                    <option value="Resident">Staff</option>
                 </select>
             </div>
 
