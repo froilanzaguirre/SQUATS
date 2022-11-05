@@ -21,7 +21,6 @@
                     <th>Purpose</th>
                     <th>Name of Room Owner To Visit</th>
                     <th>Room to Visit</th>
-                    <th>Vaccine Dose</th>
                     <th>Time In</th>
                     <th>Time Out</th>
                 </tr>
@@ -37,10 +36,8 @@
                     <td>{{ $loginfo->purposeOfVisit }}</td>
                     <td>{{ $loginfo->nameToVisit }}</td>
                     <td>{{ $loginfo->roomToVisit }}</td>
-                    <td>{{ $loginfo->vaccinedose }}</td>
                     <td>{{ $loginfo->created_at }}</td>
                     <td>{{ $loginfo->timeout }}</td>
-                
                   </tr>
                   @endforeach
             </tbody>

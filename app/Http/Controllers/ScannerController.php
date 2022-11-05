@@ -19,6 +19,7 @@ class ScannerController extends Controller
         $loginformation->purposeOfVisit = $user->purposeOfVisit;
         $loginformation->nameToVisit = $user->nameToVisit;
         $loginformation->roomToVisit = $user->roomToVisit;
+        $loginformation->vaccinedose = $user->vaccinedose;
 
         $loginformation->save();
         return redirect()->route('loginformation');

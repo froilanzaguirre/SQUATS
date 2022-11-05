@@ -169,8 +169,7 @@
                 <label for="gender">Male</label>
                 <input class="ml-1" type="radio" name="gender" value="Female">
                 <label for="gender">Female</label>
-            
-            
+            </div>            
 
             <div class="mt-4">
                 <x-jet-label for="birthDate" class="details" value="{{ __('Birth Date') }}" />

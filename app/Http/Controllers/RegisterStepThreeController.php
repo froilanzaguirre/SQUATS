@@ -26,27 +26,13 @@ class RegisterStepThreeController extends Controller
 
         if (request()->hasFile('vaccine')) {
             $vaccine = request()->file('vaccine')->getClientOriginalName();
-            request()->file('vaccine')->storeAs('vaccines', $user->id . '/' . $vaccine, '');
-            $user->update(['vaccine' => $vaccine]);
+            request()->file('vaccine')->storeAs('\vaccines' . '\user.' . $user->id . '\vaccine.' . $vaccine, '');
+            $user->update(['vaccine' => ('\vaccines' . '\user.' . $user->id . '\vaccine.' . $vaccine)]);
         }
         
         return redirect()->route('dashboard');
     }
 }
 
-
-
-        // Validator::make($input, [
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => $this->passwordRules(),
-        // ])->validate();
-
-        // return User::create([
-        //     'email' => $input['email'],
-        //     'password' => Hash::make($input['password']),
-        //     'contactNumber' => $input['contactNumber'],
-        // ]);
-        
-        
         
         

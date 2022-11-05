@@ -260,6 +260,16 @@
                 <x-jet-input id="roomToVisit" class="input-box" type="text" name="roomToVisit" :value="old('roomToVisit')" required />
             </div>
 
+            {{-- Vaccination Dose --}}
+            <x-jet-label for="vaccinedose" value="{{ __('Vaccine Dosage') }}" />
+            <select name="vaccinedose" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model.defer="state.vaccinedose">
+                <option value="walapa">Wala pa eh</option>
+                <option value="firstdose">First Dose</option>
+                <option value="full">Fully Vaccinated</option>
+                <option value="boost">Fully Vaccinated With Booster</option>
+                <option value="bullmark">Fully Boosted with chupacabra</option>
+            </select>
+
             <div class="mt-4">
                 <x-jet-label for="vaccine" class="details" value="{{ __('Vaccination Card') }}" />
                 <x-jet-input id="vaccine" class="input-box" type="file" name="vaccine" required />

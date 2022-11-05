@@ -47,6 +47,7 @@ class User extends Authenticatable
         'contactNumber',
         'name',
         'vaccine',
+        'vaccinedose',
         'dateOfVisit',
         'purposeOfVisit',
         'nameToVisit',
