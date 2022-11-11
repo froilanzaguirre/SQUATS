@@ -28,6 +28,7 @@ class QRCodeController extends Controller
             'purposeOfVisit' => $request->purposeOfVisit,
             'nameToVisit' => $request->nameToVisit,
             'roomToVisit' => $request->roomToVisit,
+            'vaccinedose' => $request->vaccinedose,
         ]);
 
         if (request()->hasFile('vaccine')) {

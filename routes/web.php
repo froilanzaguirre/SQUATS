@@ -64,9 +64,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/scanQR', function () {
-        return view('qrCodeScanner');
-    })->name('scanQR');
+    Route::get('/scanQR', [App\Http\Controllers\ScannerController::class, 'show'])->name('scanQR');
 });
 
 
@@ -94,3 +92,5 @@ Route::group(['middleware' => 'auth'], function(){
 Route::get('/user/{id}', [App\Http\Controllers\ScannerController::class, 'storeLogInfo']);
 Route::get('loginformation', [App\Http\Controllers\LogInformationController::class, 'show'])->name('loginformation');
 Route::get('expectedVisitor', [App\Http\Controllers\ExpectedVisitorController::class, 'show'])->name('expectedVisitor');
+Route::get('/vaccineInfo/{userid}', [App\Http\Controllers\VaccineInfoController::class, 'show']);
+Route::get('admindashboard', [App\Http\Controllers\AdminDashboardController::class, 'show']);

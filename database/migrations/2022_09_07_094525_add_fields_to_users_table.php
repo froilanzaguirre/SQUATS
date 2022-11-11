@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('streetName')->nullable();
             $table->string('district')->nullable();
             $table->string('vaccine')->nullable();
+            $table->string('vaccinedose')->nullable();
             $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->date('dateOfVisit')->nullable();

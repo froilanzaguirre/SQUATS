@@ -35,6 +35,7 @@ class CreateNewUser implements CreatesNewUsers
         redirect()->route('register-step2.create');
 
         return User::create([
+            'name' => $input['fname'] . " " . $input['lname'],
             'usertype' => $input['usertype'],
             'suffix' => $input['suffix'],
             'fname' => $input['fname'],
@@ -43,6 +44,9 @@ class CreateNewUser implements CreatesNewUsers
             'civilStatus' => $input['civilStatus'],
             'gender' => $input['gender'],
             'birthDate' => $input['birthDate'],
+            'roomToVisit' => 'n\a',
+            'purposeOfVisit' => 'Resident',
+            'nameToVisit' => $input['fname'] . " " . $input['lname'],
         ]);
     }
 }

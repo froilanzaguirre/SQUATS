@@ -11,6 +11,6 @@ class ExpectedVisitorController extends Controller
     {
         $expectedVisitor = ExpectedVisitor::all();
 
-        return view('expectedVisitor', compact('expectedVisitor'));
+        return view('admin.expectedVisitor', compact('expectedVisitor'));
     }
 }

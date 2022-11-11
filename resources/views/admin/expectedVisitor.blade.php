@@ -10,7 +10,7 @@
     <div class="table-responsive mt-5 p-5">
         <table class="table table-striped">
             <thead>
-                <tr class="bg-blue-900">
+                <tr>
                     <th>ID</th>
                     <th>Room Owner</th>
                     <th>Room Number</th>

@@ -12,6 +12,6 @@ class LogInformationController extends Controller
     {
         $loginformation = LogInformation::all();
 
-        return view('loginformation', compact('loginformation'));
+        return view('admin.loginformation', compact('loginformation'));
     }
 }

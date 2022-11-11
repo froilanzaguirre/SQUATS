@@ -145,6 +145,17 @@
                 <x-jet-label for="password_confirmation" class="details" value="{{ __('Confirm Password') }}" />
                 <x-jet-input id="password_confirmation" class="input-box" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
+            
+            {{-- Vaccination Dose --}}
+            <div class="col-span-6 sm:col-span-12">
+                <x-jet-label for="vaccinedose" value="{{ __('Vaccine Dosage') }}" />
+                <select name="vaccinedose" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model.defer="state.vaccinedose">
+                    <option value="Unvaccinated">Unvaccinated</option>
+                    <option value="First Dose">First Dose</option>
+                    <option value="Fully Vaccinated">Fully Vaccinated</option>
+                    <option value="Fully Vaccinated With Booster">Fully Vaccinated With Booster</option>
+                </select>
+            </div>
 
             <div class="mt-4">
                 <x-jet-label for="vaccine" class="details" value="{{ __('Vaccination Card') }}" />

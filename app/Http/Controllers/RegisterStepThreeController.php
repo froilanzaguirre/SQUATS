@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterStepThreeController extends Controller
 {
@@ -21,32 +23,17 @@ class RegisterStepThreeController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'contactNumber' => $request->contactNumber,
-            'vaccine' => $request->vaccine,
         ]);
 
         if (request()->hasFile('vaccine')) {
             $vaccine = request()->file('vaccine')->getClientOriginalName();
-            request()->file('vaccine')->storeAs('vaccines', $user->id . '/' . $vaccine, '');
-            $user->update(['vaccine' => $vaccine]);
+            request()->file('vaccine')->storeAs('vaccines', '\user_' . Auth::user()->id . '\vaccine_' . $vaccine, '');
+            auth()->user()->update(['vaccine' => ('vaccines' . '\user_' . Auth::user()->id . '\vaccine_' . $vaccine)]);
         }
         
         return redirect()->route('dashboard');
     }
 }
 
-
-
-        // Validator::make($input, [
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => $this->passwordRules(),
-        // ])->validate();
-
-        // return User::create([
-        //     'email' => $input['email'],
-        //     'password' => Hash::make($input['password']),
-        //     'contactNumber' => $input['contactNumber'],
-        // ]);
-        
-        
         
         

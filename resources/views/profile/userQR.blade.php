@@ -168,22 +168,7 @@
                                 {!! QrCode::size(320)->generate("http://127.0.0.1:8000/user/" . $qrid); !!}
                         </div>
                     </div>
-
-                    {{-- <div class="flex items-center justify-center">
-                    <!-- Name -->
-                    <div class="name">
-                        
-                        {{ Auth::user()->fname }}
-                        {{ Auth::user()->mname }}
-                        {{ Auth::user()->lname }}
-                    </div>
-                    </div>
-                    <div class="flex items-center justify-center">
-                    <!-- Classification -->
-                    <div class="name">
-                        {{ Auth::user()->usertype }}
-                    </div>
-                    </div> --}}
+                    
                     <!-- Buttons -->
                     <div class="flex items-center justify-center mt-4">
                         <x-jet-button class="ml-4" id="downloadQR">
@@ -199,7 +184,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
            
     <div class="top-container">
 		<div class="img">
@@ -260,6 +245,15 @@
                 <x-jet-input id="roomToVisit" class="input-box" type="text" name="roomToVisit" :value="old('roomToVisit')" required />
             </div>
 
+            {{-- Vaccination Dose --}}
+            <x-jet-label for="vaccinedose" value="{{ __('Vaccine Dosage') }}" />
+            <select name="vaccinedose" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <option value="Unvaccinated">Unvaccinated</option>
+                <option value="First Dose">First Dose</option>
+                <option value="Fully Vaccinated">Fully Vaccinated</option>
+                <option value="Fully Vaccinated With Booster">Fully Vaccinated With Booster</option>
+            </select>
+            
             <div class="mt-4">
                 <x-jet-label for="vaccine" class="details" value="{{ __('Vaccination Card') }}" />
                 <x-jet-input id="vaccine" class="input-box" type="file" name="vaccine" required />
