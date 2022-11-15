@@ -10,7 +10,7 @@ class LogInformationController extends Controller
 
     public function show()
     {
-        $loginformation = LogInformation::all();
+        $loginformation = LogInformation::paginate(5);
 
         return view('admin.loginformation', compact('loginformation'));
     }

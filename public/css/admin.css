@@ -1,0 +1,128 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-column-gap: 1em;
+}
+
+.wrapper>div {
+    background: #eee;
+    padding: 1em;
+}
+
+.wrapper>div:nth-child(odd) {
+    background: #ddd;
+}
+
+.wrapper-2 {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-column-gap: 1em;
+}
+
+.wrapper-2>div {
+    background: #eee;
+    padding: 1em;
+}
+
+.wrapper-2>div:nth-child(odd) {
+    background: #ddd;
+}
+
+
+/*widget css*/
+
+.color1 {
+    background: #4e756b;
+}
+
+.color2 {
+    background: #7b507c;
+}
+
+.color3 {
+    background: #6c7a8f;
+}
+
+.color4 {
+    background: #878f6c;
+}
+
+.card-body {
+    display: inline-block;
+    font-family: "Roboto", sans-serif;
+    margin: 10px;
+    padding: 20px;
+    width: 270px;
+    height: 200px;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.card-body h3 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.currency,
+.count {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.card-body p {
+    font-size: 16px;
+    margin-top: 0;
+}
+
+.card-body i {
+    font-size: 95px;
+    opacity: 0.5;
+}
+
+.btn {
+    color: white;
+    background: #2b5a7a;
+    background-image: -webkit-linear-gradient(top, #2b5a7a, #3d6682);
+    background-image: -moz-linear-gradient(top, #2b5a7a, #3d6682);
+    background-image: -ms-linear-gradient(top, #2b5a7a, #3d6682);
+    background-image: -o-linear-gradient(top, #2b5a7a, #3d6682);
+    background-image: linear-gradient(to bottom, #2b5a7a, #3d6682);
+    -webkit-border-radius: 5;
+    -moz-border-radius: 5;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 1px 3px #666666;
+    -moz-box-shadow: 0px 1px 3px #666666;
+    box-shadow: 0px 1px 3px #666666;
+    color: #ffffff;
+    font-size: 13px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    color: white;
+    background: #3d6682;
+    background-image: -webkit-linear-gradient(top, #3d6682, #2b5a7a);
+    background-image: -moz-linear-gradient(top, #3d6682, #2b5a7a);
+    background-image: -ms-linear-gradient(top, #3d6682, #2b5a7a);
+    background-image: -o-linear-gradient(top, #3d6682, #2b5a7a);
+    background-image: linear-gradient(to bottom, #3d6682, #2b5a7a);
+    text-decoration: none;
+}
+
+.inputselect {
+    font-size: 16px;
+}
+
+.inputfile {
+    font-size: 14px;
+}

@@ -10,11 +10,7 @@
                     </a>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
-                
+                {{-- Visitor --}}
                 @if(Auth::user()->usertype === 'Visitor')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('userQR') }}" :active="request()->routeIs('userQR')">
@@ -22,14 +18,26 @@
                     </x-jet-nav-link>
                 </div>
 
+                {{-- Resident --}}
                 @elseif(Auth::user()->usertype === 'Resident')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-jet-nav-link>
+                </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('visitorRequest') }}" :active="request()->routeIs('visitorRequest')">
                         {{ __('Visitor Request') }}
                     </x-jet-nav-link>
                 </div>
 
+                {{-- Admin --}}
                 @elseif(Auth::user()->usertype === 'Admin')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('admindashboard') }}" :active="request()->routeIs('admindashboard')">
+                        {{ __('Dashboard') }}
+                    </x-jet-nav-link>
+                </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('scanQR') }}" :active="request()->routeIs('scanQR')">
                         {{ __('QR Code Scanner') }}

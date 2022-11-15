@@ -1,5 +1,5 @@
 <x-guest-layout>
-   
+
 <style>
             * {
             margin: 0;
@@ -34,7 +34,7 @@
             .img img{
                 width: 500px;
             }
-           
+
 
             .left-container {
                 position: absolute;
@@ -77,7 +77,7 @@
             border-radius: 10%;
             z-index: 6;
             }
-        
+
             h2{
             padding-top:140px;
             color:  #1C2833;
@@ -93,7 +93,7 @@
             height: 35px;
             text-align:center;
             }
-            
+
             .btn:hover {
             background-color:#1988D1;
             }
@@ -117,13 +117,13 @@
 			<img src="images/bg.png">
 		</div>
       <div class="forms-container">
-      <h2 class="title">Step 3/3 - Create your account</h2>  
+      <h2 class="title">Step 3/3 - Create your account</h2>
         <div class="left-container">
 
         <br><br><br><br>
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('register-step3.post') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('createResidentAccount') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="mt-4">
@@ -145,7 +145,7 @@
                 <x-jet-label for="password_confirmation" class="details" value="{{ __('Confirm Password') }}" />
                 <x-jet-input id="password_confirmation" class="input-box" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
-            
+
             {{-- Vaccination Dose --}}
             <div class="col-span-6 sm:col-span-12">
                 <x-jet-label for="vaccinedose" value="{{ __('Vaccine Dosage') }}" />
@@ -168,5 +168,5 @@
                 </x-jet-button>
             </div>
         </form>
-   
+
 </x-guest-layout>

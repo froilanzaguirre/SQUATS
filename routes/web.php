@@ -66,7 +66,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/scanQR', [App\Http\Controllers\ScannerController::class, 'show'])->name('scanQR');
 });
-
+Route::get('/logout/{id}', [App\Http\Controllers\ScannerController::class, 'timeout']);
 
 //Register Step 2 and Step 3
 Route::group(['middleware' => 'auth'], function(){
@@ -91,6 +91,16 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/user/{id}', [App\Http\Controllers\ScannerController::class, 'storeLogInfo']);
 Route::get('loginformation', [App\Http\Controllers\LogInformationController::class, 'show'])->name('loginformation');
-Route::get('expectedVisitor', [App\Http\Controllers\ExpectedVisitorController::class, 'show'])->name('expectedVisitor');
 Route::get('/vaccineInfo/{userid}', [App\Http\Controllers\VaccineInfoController::class, 'show']);
-Route::get('admindashboard', [App\Http\Controllers\AdminDashboardController::class, 'show']);
+Route::get('expectedVisitor', [App\Http\Controllers\ExpectedVisitorController::class, 'show'])->name('expectedVisitor');
+Route::get('admindashboard', [App\Http\Controllers\AdminDashboardController::class, 'show'])->name('admindashboard');
+
+// sidebartest
+Route::get('sidebar', function () {
+    return view('admin.sidebar');
+})->name('sidebar');
+
+//create resident account
+Route::get('openAccountCreator', [App\Http\Controllers\AdminDashboardController::class, 'openPopup']);
+Route::get('closeAccountCreator', [App\Http\Controllers\AdminDashboardController::class, 'closePopup']);
+Route::post('createResidentAccount', [App\Http\Controllers\AdminDashboardController::class, 'createAccount'])->name('createResidentAccount');

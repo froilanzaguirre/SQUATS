@@ -13,7 +13,7 @@ class QRCodeController extends Controller
     public function create()
     {
         $users_id = DB::table('users')->latest()->first();
-        
+
         return view('profile.userQR', ['qrid' => $users_id->id]);
     }
 
@@ -29,23 +29,24 @@ class QRCodeController extends Controller
             'nameToVisit' => $request->nameToVisit,
             'roomToVisit' => $request->roomToVisit,
             'vaccinedose' => $request->vaccinedose,
+            'usertype' => 'Visitor',
         ]);
 
         if (request()->hasFile('vaccine')) {
             $vaccine = request()->file('vaccine')->getClientOriginalName();
-            request()->file('vaccine')->storeAs('vaccines', '\user.' . $user->id . '\vaccine.' . $vaccine, '');
-            $user->update(['vaccine' => ('vaccines' . '\user.' . $user->id . '\vaccine.' . $vaccine)]);
+            request()->file('vaccine')->move('vaccines', '\user_' . $user->id . '_vaccine_' . $vaccine, '');
+            $user->update(['vaccine' => ('\vaccines' . '\user_' . $user->id . '_vaccine_' . $vaccine)]);
         }
 
         return back()->with('generated', ['qrid' => $user->id]);
-        
+
         // return back()->with('generated', '');
     }
 
     public function downloadQR(){
 
         return redirect()->route('userQR');
-        
+
     }
 
     public function getQRID($id){

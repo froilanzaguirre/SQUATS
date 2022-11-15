@@ -16,7 +16,7 @@ class RegisterStepThreeController extends Controller
     {
         return view('auth.register-step3');
     }
-    
+
     public function store(Request $request, User $user)
     {
         auth()->user()->update([
@@ -27,13 +27,13 @@ class RegisterStepThreeController extends Controller
 
         if (request()->hasFile('vaccine')) {
             $vaccine = request()->file('vaccine')->getClientOriginalName();
-            request()->file('vaccine')->storeAs('vaccines', '\user_' . Auth::user()->id . '\vaccine_' . $vaccine, '');
-            auth()->user()->update(['vaccine' => ('vaccines' . '\user_' . Auth::user()->id . '\vaccine_' . $vaccine)]);
+            // request()->file('vaccine')->storeAs('vaccines', '\user_' . Auth::user()->id . '\vaccine_' . $vaccine, '');
+            request()->file('vaccine')->move('vaccines', '\user_' . Auth::user()->id . '_vaccine_' . $vaccine, '');
+            auth()->user()->update(['vaccine' => ('\vaccines' . '\user_' . Auth::user()->id . '_vaccine_' . $vaccine)]);
         }
-        
+
         return redirect()->route('dashboard');
     }
 }
 
-        
-        
+

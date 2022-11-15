@@ -11,11 +11,21 @@ class ScannerController extends Controller
 {
     public function show(){
         $lastentered = DB::table('log_information')->latest()->first();
-        
+
         return view('admin.qrCodeScanner', ['info' => $lastentered]);
     }
 
-    public function storeLogInfo($id){        
+    public function timeout($id){
+        $loginformation = LogInformation::find($id);
+        $loginformation->timeout = $loginformation->updated_at;
+        $loginformation->save();
+        $loginformation->timeout = $loginformation->updated_at;
+        $loginformation->save();
+
+        return redirect()->route('loginformation')->with('loggedout', '');
+    }
+
+    public function storeLogInfo($id){
         $user = User::find($id);
         $loginformation = new LogInformation();
         $loginformation->userid = $user->id;

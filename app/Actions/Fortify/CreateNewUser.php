@@ -10,7 +10,7 @@ use Laravel\Jetstream\Jetstream;
 
 class CreateNewUser implements CreatesNewUsers
 {
-    
+
     protected $redirectTo = '/register-step2.create';
 
     // use PasswordValidationRules;
