@@ -18,13 +18,11 @@
                 <h5 class="card-subtitle mb-2 text-muted">{{$user->usertype}}</h5>
                 <h5 class="ml-3 mt-1 card-title">QR Code</h5>
                 <div class="visible-print text-center">
-                    {!! QrCode::size(300)->generate("http://127.0.0.1:8000/user/" . $user->id); !!}
+                    {{$qr}}
                 </div>
                 <h5 class="ml-3 mt-3 card-title">Vaccine Card</h5>
-                <img class="justify-content-center" src="{{$user->vaccine}}" width="300px" alt="No Vaccination Card">
+                <img class="justify-content-center" src="C:\xampp\htdocs\security-system-squatss\public{{$user->vaccine}}" width="300px" alt="No Vaccination Card">
             </div>
-
-            <a class="btn btncolor" href="downloaduserid/{{$user->id}}">Download QR</a>
         </div></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

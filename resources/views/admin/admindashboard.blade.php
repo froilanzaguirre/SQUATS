@@ -144,23 +144,5 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
 
-
-
-        {{-- Resident Account Creation --}}
-        <a href="openAccountCreator">Create Account For Resident</a>
-        @if ($isOpen)
-            @include('admin.createuseraccount')
-        @endif
-
-
     </x-slot>
 </x-app-layout>
-
-@if (session()->has('created'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Account Created',
-        })
-    </script>
-@endif

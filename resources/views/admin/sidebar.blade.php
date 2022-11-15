@@ -16,9 +16,13 @@
                 <i class="fas fa fa-book fas-2x"></i>
                 <span class="nav-text">Log Table</span>
             </a></li>
+            <li class="has-subnav"><a href="viewusers">
+                    <i class="fas fa fa-users fas-2x"></i>
+                    <span class="nav-text">User Management</span>
+                </a></li>
         <li class="has-subnav"><a href="user/profile">
                 <i class="fas fa fa-user fas-2x"></i>
-                <span class="nav-text">User</span>
+                <span class="nav-text">Profile</span>
             </a></li>
         <li class="has-subnav"><a href="logout">
                 <i class="fas fa fa-power-off fas-2x"></i>

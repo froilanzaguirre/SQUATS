@@ -4,7 +4,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Log Information') }}
+            {{ __('Users') }}
         </h2>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -13,20 +13,26 @@
         <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Admin Dashboard</title>
+            <title>View Users</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
                 crossorigin="anonymous">
         </head>
 
         <body>
+
+            {{-- Resident Account Creation --}}
+            <a class="btn btncolor" href="openAccountCreator">Create Account For Resident</a>
+            @if ($isOpen)
+                @include('admin.createuseraccount')
+            @endif
+
             <link rel="stylesheet" href="css\admin.css">
 
             <div class="container text-center">
+
                 <div class="align-items-start">
                     @include('admin.sidebar')
-
-                    <a class="btn btncolor" href="downloadlogpdf">Download Records</a>
 
                     {{-- start here --}}
 
@@ -39,43 +45,32 @@
                                     <th>Name</th>
                                     <th>Gender</th>
                                     <th>Contact Number</th>
-                                    <th>Date</th>
-                                    <th>Purpose</th>
-                                    <th>Room Owner</th>
                                     <th>Room Number</th>
                                     <th>Vaccine Information</th>
-                                    <th>Time In</th>
-                                    <th>Time Out</th>
-                                    <th>Log Out</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($loginformation as $loginfo)
+                                @foreach ($users as $user)
                                     <tr>
-                                        <th scope="row">{{ $loginfo->userid }}</th>
-                                        <td>{{ $loginfo->usertype }}</td>
-                                        <td>{{ $loginfo->name }}</td>
-                                        <td>{{ $loginfo->gender }}</td>
-                                        <td>{{ $loginfo->contactNumber }}</td>
-                                        <td>{{ $loginfo->dateOfVisit }}</td>
-                                        <td>{{ $loginfo->purposeOfVisit }}</td>
-                                        <td>{{ $loginfo->nameToVisit }}</td>
-                                        <td>{{ $loginfo->roomToVisit }}</td>
+                                        <th scope="row">{{ $user->id }}</th>
+                                        <td>{{ $user->usertype }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->gender }}</td>
+                                        <td>{{ $user->contactNumber }}</td>
+                                        <td>{{ $user->roomToVisit }}</td>
                                         <td>
-                                            <a href="/vaccineInfo/{{ $loginfo->userid }}" class="btn btncolor">
-                                                <i class="fa fa-eye"></i> View ID</a>
+                                            <a href="/vaccineInfo/{{ $user->id }}" class="btn btncolor"><i
+                                                    class="fa fa-eye"></i> View ID</a>
                                         </td>
-                                        <td>{{ $loginfo->created_at }}</td>
-                                        <td>{{ $loginfo->timeout }}</td>
-                                        <td>
-                                            <a href="/logout/{{ $loginfo->id }}" class="btn btncolor"><i
-                                                    class="fa fa-arrow-right"></i> Log Out</a>
+                                        <td><a href="" class="btn btnadd">Edit User</a>
+                                            <a href="" class="btn btndel">Delete User</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $loginformation->links() }}
+                        {{ $users->links() }}
                     </div><br>
 
                     {{-- stop here --}}
@@ -101,3 +96,12 @@
 
     </x-slot>
 </x-app-layout>
+
+@if (session()->has('created'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Account Created',
+        })
+    </script>
+@endif

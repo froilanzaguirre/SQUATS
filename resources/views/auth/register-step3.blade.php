@@ -123,7 +123,7 @@
         <br><br><br><br>
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('createResidentAccount') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('register-step3.post') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="mt-4">

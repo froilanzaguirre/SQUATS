@@ -100,7 +100,15 @@ Route::get('sidebar', function () {
     return view('admin.sidebar');
 })->name('sidebar');
 
+
+// View Users
+Route::get('viewusers', [App\Http\Controllers\ViewUserController::class, 'show'])->name('viewusers');
 //create resident account
-Route::get('openAccountCreator', [App\Http\Controllers\AdminDashboardController::class, 'openPopup']);
-Route::get('closeAccountCreator', [App\Http\Controllers\AdminDashboardController::class, 'closePopup']);
-Route::post('createResidentAccount', [App\Http\Controllers\AdminDashboardController::class, 'createAccount'])->name('createResidentAccount');
+Route::get('openAccountCreator', [App\Http\Controllers\ViewUserController::class, 'openPopup']);
+Route::post('createResidentAccount', [App\Http\Controllers\ViewUserController::class, 'createAccount'])->name('createResidentAccount');
+
+// PDF
+Route::get('downloadlogpdf', [App\Http\Controllers\PDFController::class, 'downloadlogpdf'])->name('downloadlogpdf');
+Route::get('/vaccineInfo/downloaduserid/{userid}', [App\Http\Controllers\PDFController::class, 'downloaduserid']);
+
+Route::get('/vaccineInfo/testview/{userid}', [App\Http\Controllers\PDFController::class, 'testview']);

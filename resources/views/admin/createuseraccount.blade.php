@@ -80,7 +80,7 @@
                             class="inline-flex justify-center w-full rounded-md border-green-200 border-transparent px-4 py-2 bg-green-500 text-base leading-6 font-medium text-white -sm hover:bg-green-300 focus:outline-none focus:border-green-200-green-700 focus:-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             Create Account
                             </a>
-                            <a href="admindashboard" type="button"
+                            <a href="viewusers" type="button"
                                 class="inline-flex justify-center w-full rounded-md border-green-200 border-transparent px-4 py-2 bg-green-500 text-base leading-6 font-medium text-white -sm hover:bg-green-300 focus:outline-none focus:border-green-200-green-700 focus:-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                                 Cancel
                             </a>

@@ -122,7 +122,7 @@
             border-radius: 10%;
             z-index: 6;
             }
-        
+
             h2{
             margin: 1px 0;
             color:  #1C2833;
@@ -153,7 +153,7 @@
             background-color: #1988D1;
             }
 
-          
+
 </style>
 
     </head>
@@ -162,7 +162,7 @@
 		<div class="img">
 			<img src="images/bg.png">
 		</div>
-         
+
       <div class="forms-container">
         <div class="left-container">
           <form action="#" class="left-form">
@@ -172,7 +172,7 @@
         <br><br><br>
 
             @if (Route::has('login'))
-                
+
                     @auth
                         <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
                     @else
@@ -181,13 +181,13 @@
 
                         @if (Route::has('register'))
                         <h2>Sign up for a SQUATS account</h2>
-                            <a href="{{ route('register') }}" class="btn solid text-center text-lg">Register Here</a>
+                            {{-- <a href="{{ route('register') }}" class="btn solid text-center text-lg">Register Here</a> --}}
                             <a href="{{ route('userQR.create') }}" class="btn solid text-center text-lg">Just Visiting</a>
                         @endif
                     @endauth
                 </div>
             @endif
-           
+
          </form>
 
         </div>
@@ -196,7 +196,7 @@
       <div class="panels-container">
         <div class="panel left-panel">
           <div class="content">
- 
+
           </div>
         </div>
     </body>
