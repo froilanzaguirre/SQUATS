@@ -35,7 +35,7 @@
                 @elseif(Auth::user()->usertype === 'Admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('admindashboard') }}" :active="request()->routeIs('admindashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Admin Dashboard') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

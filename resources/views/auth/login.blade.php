@@ -86,7 +86,7 @@
             border-radius: 10%;
             z-index: 6;
             }
-        
+
             h2{
             margin: 1px 0;
             color:  #1C2833;
@@ -134,13 +134,13 @@
 		<div class="img">
 			<img src="images/bg.png">
 		</div>
-         
+
       <div class="forms-container">
       <div class="img1">
 			<img src="images/squats-bg.png">
 		</div>
         <div class="left-container">
-          
+
 
         <x-jet-validation-errors class="mb-4" />
 
@@ -154,7 +154,7 @@
             @csrf
 
             <div>
-                <x-jet-label for="email" class="details" value="{{ __('Email') }}" />
+                <x-jet-label for="email" class="details" value="{{ __('Email/Username') }}" />
                 <x-jet-input id="email"  class="input-box" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
@@ -168,7 +168,7 @@
                     <x-jet-checkbox id="remember_me" name="remember" />
                     <span class="ml-2 text-md text-gray-600">{{ __('Remember me') }}</span>
                 </label>
-          
+
             <div class="block mt-4">
                   <x-jet-button class="btn">
                     {{ __('Log in') }}

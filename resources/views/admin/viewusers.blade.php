@@ -1,40 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   @include('admin.css')
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Users') }}
-        </h2>
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>View Users</title>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-                crossorigin="anonymous">
-        </head>
-
-        <body>
-
+  </head>
+  <body>
+    <div class="container-scroller bg-dark">
+      <div class="row p-0 m-0 proBanner" id="proBanner">
+        <div class="col-md-12 p-0 m-0">
+          <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
+            <div class="ps-lg-1">
+              <div class="d-flex align-items-center justify-content-between">
+               
+              </div>
+            </div>
             {{-- Resident Account Creation --}}
-            <a class="btn btncolor" href="openAccountCreator">Create Account For Resident</a>
             @if ($isOpen)
                 @include('admin.createuseraccount')
             @endif
+            <div class="d-flex align-items-center justify-content-between">
+             
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- partial:partials/_sidebar.html -->
+     @include('admin.sidebar')
+      <!-- partial -->
+     @include('admin.navbar')
+        <!-- partial -->
+        <div class="container">
 
-            <link rel="stylesheet" href="css\admin.css">
+      
 
-            <div class="container text-center">
-
-                <div class="align-items-start">
-                    @include('admin.sidebar')
-
-                    {{-- start here --}}
+             <div class="float-right">
+             <br><br><br><br>
 
                     <div class="table-responsive mt-5">
                         <table class="table table-striped">
@@ -93,10 +96,6 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
 
-
-    </x-slot>
-</x-app-layout>
-
 @if (session()->has('created'))
     <script>
         Swal.fire({
@@ -105,3 +104,5 @@
         })
     </script>
 @endif
+
+

@@ -1,59 +1,136 @@
-<nav class="main-menu">
-    <ul>
-        <li><a href="admindashboard">
-                <i class="fas fa fa-home fas-2x"></i>
-                <span class="nav-text">Dashboard</span>
-            </a></li>
-        <li><a href="scanQR">
-                <i class="fas fa fa-qrcode fas-2x"></i>
-                <span class="nav-text">QR Code Scanner</span>
-            </a></li>
-        <li><a href="expectedVisitor">
-                <i class="fas fa fa-table fas-2x"></i>
-                <span class="nav-text">Expected Visitors</span>
-            </a></li>
-        <li><a href="loginformation">
-                <i class="fas fa fa-book fas-2x"></i>
-                <span class="nav-text">Log Table</span>
-            </a></li>
-            <li class="has-subnav"><a href="viewusers">
-                    <i class="fas fa fa-users fas-2x"></i>
-                    <span class="nav-text">User Management</span>
-                </a></li>
-        <li class="has-subnav"><a href="user/profile">
-                <i class="fas fa fa-user fas-2x"></i>
-                <span class="nav-text">Profile</span>
-            </a></li>
-        <li class="has-subnav"><a href="logout">
-                <i class="fas fa fa-power-off fas-2x"></i>
-                <span class="nav-text">Logout</span>
-            </a></li>
-    </ul>
-</nav>
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+        &nbsp; &nbsp; &nbsp;
+        <a class="navbar-brand" href="{{url('/admindashboard')}}"><img src="images/squats-logo.png" style="color:white; width:50px"></a>
+        <label class="logo"> SQUATS - Security System </label>
+        </div>
+        <ul class="nav">
 
-<style>
+            <!-- Responsive Settings Options -->
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="flex items-center px-4">
+                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                    <div class="shrink-0 mr-3">
+                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                    </div>
+                @endif
+
+                <div>
+                    <div class="font-medium text-base text-light">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                </div>
+            </div>
+
+            <div class="mt-3 space-y-1">
+                  <li class="nav-item menu-items">
+               <!-- Account Management -->
+                <x-jet-responsive-nav-link class="fas fa fa-user fas-2x text-gray-400" href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                    {{ __('Profile') }}
+                </x-jet-responsive-nav-link>
+
+                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                    <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
+                        {{ __('API Tokens') }}
+                    </x-jet-responsive-nav-link>
+                @endif
+                </a>
+            </li>
+
+                <li class="nav-item menu-items">
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}" x-data>
+                    @csrf
+
+                    <x-jet-responsive-nav-link class="fas fa fa-power-off fas-2x text-gray-400" href="{{ route('logout') }}"
+                                   @click.prevent="$root.submit();">
+                        {{ __('Log Out') }}
+                    </x-jet-responsive-nav-link>
+                </form>
+
+                <!-- Team Management -->
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                    <div class="border-t border-gray-200"></div>
+
+                    <div class="block px-4 py-2 text-xs text-gray-400">
+                        {{ __('Manage Team') }}
+                    </div>
+
+                    <!-- Team Settings -->
+                    <x-jet-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
+                        {{ __('Team Settings') }}
+                    </x-jet-responsive-nav-link>
+
+                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                        <x-jet-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
+                            {{ __('Create New Team') }}
+                        </x-jet-responsive-nav-link>
+                    @endcan
+
+                    <div class="border-t border-gray-200"></div>
+
+                    <!-- Team Switcher -->
+                    <div class="block px-4 py-2 text-xs text-gray-400">
+                        {{ __('Switch Teams') }}
+                    </div>
+
+                    @foreach (Auth::user()->allTeams() as $team)
+                        <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link" />
+                    @endforeach
+                @endif
+
+                </a>
+          </li>
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+          
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{url('scanQR')}}">
+              <span class="menu-icon">
+                <i class="fas fa fa-qrcode fas-2x"></i>
+              </span>
+              <span class="menu-title">QR Code Scanner</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+             <a class="nav-link" href="{{url('expectedVisitor')}}">
+              <span class="menu-icon">
+                <i class="fas fa fa-table fas-2x"></i>
+              </span>
+              <span class="menu-title">Expected Visitors</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+             <a class="nav-link" href="{{url('loginformation')}}">
+              <span class="menu-icon">
+                <i class="fas fa fa-book fas-2x"></i>
+              </span>
+              <span class="menu-title">Log Table</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+             <a class="nav-link" href="{{url('viewusers')}}">
+              <span class="menu-icon">
+                <i class="fas fa fa-users fas-2x"></i>
+              </span>
+              <span class="menu-title">User Management</span>
+            </a>
+          </li>
+
+          
+        </ul>
+      </nav>
+
+      <style>
     @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
     @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
     .fas-2x {
-        font-size: 20px;
-    }
-
-    .fas {
-        position: relative;
-        display: table-cell;
-        width: 60px;
-        height: 36px;
-        text-align: center;
-        vertical-align: middle;
-    }
-
-
-    .main-menu:hover,
-    nav.main-menu.expanded {
-        width: 250px;
-        overflow: visible;
+        font-size: 90px;
     }
 
     .main-menu {

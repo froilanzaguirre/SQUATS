@@ -49,7 +49,7 @@ class ViewUserController extends Controller
             $user->update(['vaccine' => ('\vaccines' . '\user_' . $user->id . '_vaccine_' . $vaccine)]);
         }
 
-        dd($user->id);
+        //dd($user->id);
         $isOpen = false;
         return back()->with('created', '');
     }

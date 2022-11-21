@@ -25,8 +25,11 @@ return new class extends Migration
             $table->string('roomToVisit')->nullable();
             $table->string('usertype')->nullable();
             $table->string('vaxinfo')->nullable();
-            $table->timestamp('timein')->nullable();
-            $table->timestamp('timeout')->nullable();
+            $table->string('dayin')->nullable();
+            $table->string('timein')->nullable();
+            $table->string('timeout')->nullable();
+            $table->string('frequenttimein')->nullable();
+            $table->string('frequenttimeout')->nullable();
             $table->timestamps();
         });
     }

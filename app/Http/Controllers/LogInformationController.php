@@ -9,7 +9,7 @@ class LogInformationController extends Controller
 {
     public function show()
     {
-        $loginformation = LogInformation::paginate(5);
+        $loginformation = LogInformation::paginate(8);
 
         return view('admin.loginformation', compact('loginformation'));
     }

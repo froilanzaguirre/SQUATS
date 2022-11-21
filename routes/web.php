@@ -89,11 +89,11 @@ Route::group(['middleware' => 'auth'], function(){
 //     return response($id);
 // });
 
-Route::get('/user/{id}', [App\Http\Controllers\ScannerController::class, 'storeLogInfo']);
+Route::get('/user/{id}', [App\Http\Controllers\ScannerController::class, 'storeLogInfo'])->middleware('throttle:scancd');
 Route::get('loginformation', [App\Http\Controllers\LogInformationController::class, 'show'])->name('loginformation');
 Route::get('/vaccineInfo/{userid}', [App\Http\Controllers\VaccineInfoController::class, 'show']);
 Route::get('expectedVisitor', [App\Http\Controllers\ExpectedVisitorController::class, 'show'])->name('expectedVisitor');
-Route::get('admindashboard', [App\Http\Controllers\AdminDashboardController::class, 'show'])->name('admindashboard');
+Route::get('admindashboard', [App\Http\Controllers\AdminDashboardController::class, 'show'])->middleware('throttle:scancd')->name('admindashboard');
 
 // sidebartest
 Route::get('sidebar', function () {
