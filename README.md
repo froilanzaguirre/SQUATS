@@ -1,4 +1,6 @@
-![alt text](public/images/squats-logo.png)
+<div align="center">
+    ![alt text](public/images/squats-logo.png)
+</div>
 # SQUATS
 =======
 “SQUATS: Web-based Security System for Sta Philomena Residences Dormitel using QR code Technology with Analytics”
