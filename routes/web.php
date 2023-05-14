@@ -22,9 +22,15 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'show'])->name('dashboard');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('visitorapproval', [App\Http\Controllers\HomeController::class, 'residentVisitorApproval'])->name('visitorapproval');
 });
 
 
@@ -42,7 +48,6 @@ Route::middleware([
 // });
 
 //New User QR
-
 Route::get('userQR', [App\Http\Controllers\QRCodeController::class, 'create'])->name('userQR.create');
 Route::post('userQR', [App\Http\Controllers\QRCodeController::class, 'store'])->name('userQR.post');
 
@@ -89,26 +94,51 @@ Route::group(['middleware' => 'auth'], function(){
 //     return response($id);
 // });
 
-Route::get('/user/{id}', [App\Http\Controllers\ScannerController::class, 'storeLogInfo']);
-Route::get('loginformation', [App\Http\Controllers\LogInformationController::class, 'show'])->name('loginformation');
+Route::get('/user{id}', [App\Http\Controllers\ScannerController::class, 'storeLogInfo'])->middleware('throttle:scancd');
 Route::get('/vaccineInfo/{userid}', [App\Http\Controllers\VaccineInfoController::class, 'show']);
-Route::get('expectedVisitor', [App\Http\Controllers\ExpectedVisitorController::class, 'show'])->name('expectedVisitor');
-Route::get('admindashboard', [App\Http\Controllers\AdminDashboardController::class, 'show'])->name('admindashboard');
+// Route::get('admindashboard', [App\Http\Controllers\AdminDashboardController::class, 'show'])->name('admindashboard');
+Route::get('admindashboard', [App\Http\Controllers\AdminDashboardController::class, 'show'])->middleware('throttle:scancd')->name('admindashboard');
+Route::get('curfewtable', [App\Http\Controllers\AdminDashboardController::class, 'showcurfew'])->name('curfewtable');
 
 // sidebartest
 Route::get('sidebar', function () {
     return view('admin.sidebar');
 })->name('sidebar');
 
+//Visitor
+Route::get('expectedVisitor', [App\Http\Controllers\ExpectedVisitorController::class, 'show'])->name('expectedVisitor');
+Route::get('approvevisitor{id}', [App\Http\Controllers\QRCodeController::class, 'store']);
+
+//Log Information Table
+Route::get('loginformation', [App\Http\Controllers\LogInformationController::class, 'show'])->name('loginformation');
+Route::get('search', [App\Http\Controllers\LogInformationController::class, 'search'])->name('search');
+Route::get('showalllogs', [App\Http\Controllers\LogInformationController::class, 'showalllogs'])->name('showalllogs');
 
 // View Users
 Route::get('viewusers', [App\Http\Controllers\ViewUserController::class, 'show'])->name('viewusers');
 //create resident account
 Route::get('openAccountCreator', [App\Http\Controllers\ViewUserController::class, 'openPopup']);
 Route::post('createResidentAccount', [App\Http\Controllers\ViewUserController::class, 'createAccount'])->name('createResidentAccount');
+Route::get('openAccountEditor{id}', [App\Http\Controllers\ViewUserController::class, 'openEdit']);
+Route::post('editResidentAccount/{id}', [App\Http\Controllers\ViewUserController::class, 'editAccount'])->name('editResidentAccount');
+Route::get('todeleteuser{id}', [App\Http\Controllers\ViewUserController::class, 'todelete']);
+Route::get('deleteuser{id}', [App\Http\Controllers\ViewUserController::class, 'delete']);
+Route::get('residentsearch', [App\Http\Controllers\ViewUserController::class, 'search'])->name('residentsearch');
+Route::get('staffresidentlist', [App\Http\Controllers\ViewUserController::class, 'staffshow'])->name('staffresidentlist');
+Route::get('staffresidentsearch', [App\Http\Controllers\ViewUserController::class, 'staffsearch'])->name('staffresidentsearch');
 
 // PDF
-Route::get('downloadlogpdf', [App\Http\Controllers\PDFController::class, 'downloadlogpdf'])->name('downloadlogpdf');
+Route::get('downloadlogpdf{search}', [App\Http\Controllers\PDFController::class, 'downloadlogpdf']);
+Route::get('downloadlogpdf', [App\Http\Controllers\PDFController::class, 'downloadlogpdfnow']);
+Route::get('downloadresidents', [App\Http\Controllers\PDFController::class, 'downloadresidentslist']);
+Route::get('downloadloganalysis', [App\Http\Controllers\PDFController::class, 'downloadloganalysis']);
 Route::get('/vaccineInfo/downloaduserid/{userid}', [App\Http\Controllers\PDFController::class, 'downloaduserid']);
-
 Route::get('/vaccineInfo/testview/{userid}', [App\Http\Controllers\PDFController::class, 'testview']);
+
+Route::get('logout', function ()
+{
+    auth()->logout();
+    Session()->flush();
+
+    return Redirect::to('/');
+})->name('logout');

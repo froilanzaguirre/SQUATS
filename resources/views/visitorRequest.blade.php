@@ -1,166 +1,336 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+___________________________________________________________________________________________________________
+___________________________________________________________________________________________________________
+
+--------------------------HINDI ITO KASAMA SA SYSTEM WAG NYO TO GAGALAWIN----------------------------------
+___________________________________________________________________________________________________________
+___________________________________________________________________________________________________________
 
 <style>
-    .container .popup{
-        height: 50%;
-        width: 52%;
-        top: 180px;
-        right:  380px;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        display:none;
-        z-index: 7;
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+    h2{
+        margin-left:0.8rem;
+        font-size:1.5rem;
+        font-weight:bold;
+
     }
-    .container .popup:after{
-        height: 50%;
-        width: 52%;
-        top: 180px;
-        right: 380px;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        display: block;
-        z-index: 7;
-        }
-    .container .popup .popupcontent{
-        height: 650px;
-        width: 500px;
-        background: white;
-        padding: 20px;
-        border-radius: 5px;
-        position: relative;
-        border: 3px solid black;
+    h3{
+        margin-left:1rem;
+        font-size:20px;
     }
-    .close-btn{
-        position: absolute;
-        right: 20px;
-        top: 15px;
-        font-size: 18px;
-        cursor: pointer;
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
     }
-    .top-container{
+    body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    overflow:hidden;
+    }
+    .container{
+    max-width: 700px;
+    width: 100%;
+    height:100%;
+    background-color: #fff;
+    padding: 25px 40px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    }
+    .container .title{
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+    }
+    .container .title::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    }
+    .content form .user-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+    }
+    form .user-details .input-box{
+    margin-bottom: 4px;
+    width: calc(100% / 2 - 5px);
+    }
+    form .input-box span.details{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    }
+    form .input-vax{
+    display: flex;
+    font-weight: 500;
+    margin-bottom: 1px;
+    margin-left:1.5rem;
+    }
+    .input-box{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    }
+    .user-details .input-box input:focus,
+    .user-details .input-box input:valid{
+    border-color: #9b59b6;
+    }
+
+    form .category{
+    display: flex;
+    width: 80%;
+    margin: 14px 0 ;
+    justify-content: space-between;
+    }
+    form .category label{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    }
+    form .category label .dot{
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: #d9d9d9;
+    border: 5px solid transparent;
+    transition: all 0.3s ease;
+    }
+    #dot-1:checked ~ .category label .one,
+    #dot-2:checked ~ .category label .two,
+    #dot-3:checked ~ .category label .three{
+    background: #9b59b6;
+    border-color: #d9d9d9;
+    }
+    form input[type="radio"]{
+    display: none;
+    }
+ form .btn{
+            display: block;
+            width: 93%;
+            height: 40px;
+            background-color:#21618C;
+            background-size: 200%;
+            font-size: 1.2rem;
+            padding-top: 7px;
+            padding-bottom: 15px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            margin: 1rem;
+            cursor: pointer;
+            transition: .5s;
+            border-radius: 5px;
+            border:none;
+    }
+   form .btn:hover{
+        background-position: right;
+        color: black;
+    }
+ form .button input{
+   height: 100%;
+   width: 100%;
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 18px;
+   font-weight: 500;
+   letter-spacing: 1px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+ }
+ form .button input:hover{
+  /* transform: scale(0.99); */
+  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  }
+  .btn{
+            display: block;
+            width: 100%;
+            height: 40px;
+            background-color:#21618C;
+            background-size: 200%;
+            font-size: 1.2rem;
+            padding-top: 7px;
+            padding-bottom: 15px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            margin: 1rem;
+            cursor: pointer;
+            transition: .5s;
+            border-radius: 5px;
+            border:none;
+    }
+    .btn:hover{
+        background-position: right;
+        color: black;
+    }
+  .wave{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .container-h{
         width: 100vw;
-        height: 83.4vh;
+        height: 90vh;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap:15.2rem;
-        padding: 0 2rem;
-        overflow: hidden;
-        position: absolute;      
+        grid-gap :0;
+        padding: 0;
+        background-color:#21618C;
     }
+
     .img{
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        z-index: 6;
-        padding-top:40px;
     }
     .img img{
         width: 500px;
     }
-    .left-container {
-        position: absolute;
-        top: 45%;
-        transform: translate(-50%, -50%);
-        left: 70%;
-        width: 50%;
-        transition: 1s 0.7s ease-in-out;
-        display: grid;
-        grid-template-columns: 1fr;
-        z-index: 5;
+
+    form{
+        width: 620px;
     }
-    .left-form {
+
+    .i{
+        color: #d9d9d9;
         display: flex;
-        align-items: left;
-        justify-content: left;
-        flex-direction: column;
-        padding: 0rem 5rem;
-        transition: all 0.2s 0.7s;
-        overflow: hidden;
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
-    }
-    .row{
-        display: flex;
-        align-items: left;
-        justify-content: left;
-        font-size: 1.1rem;
-        margin-bottom: 3px;
-    }
-    .top-container:before {
-        content: "";
-        position: absolute;
-        height: 1900px;
-        width: 2000px;
-        top: 43%;
-        right: 57%;
-        transform: translateY(-50%);
-        background-color:#65B0BD;
-        transition: 1.8s ease-in-out;
-        border-radius: 10%;
-        z-index: 6;
-    }   
-    h2{
-        margin: 1px 0;
-        color:  #1C2833;
-        font-size: 2rem;
-    }
-    .btn{
-        background-color:blue;
-        color:white;    
-        margin-left:10px;
-        width: 153px;
-        height: 30px;
-    }
-    .btn:hover {
-        background-color:#1988D1;
-   }
-    .input-box{
-        margin-bottom: 2px;
-        width: 650px;
-        height:40px;
-    }
-    .details{
-        display: block;
-        font-weight: 900;
-        margin-bottom: 3px;
-        font-size: 1rem;
-    }
-    .name{
-        margin: 1px 0;
-        color:  #1C2833;
-        font-size: 1.7rem;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
-        font-weight: 900;
-        margin-bottom: 5px;
-    }    
+    }
+
+    .i i{
+        transition: .3s;
+    }
+
+    a{
+        color:blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none !important;
+        border: none !important;        
+        text-decoration: none !important;
+        box-shadow: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-user-select: none; /* Chrome/Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+        user-select: none;
+    }
+    a:hover{
+        color: white;
+    }
+
+    @media(max-width: 584px){
+    .container{
+        max-width: 100%;
+        width: 120vw;
+        height: 100vh;
+    }
+    form .user-details .input-box{
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    form .category{
+        width: 100%;
+    }
+    .content form .user-details{
+        max-height: 400px;
+        overflow-y: scroll;
+    }
+    .user-details::-webkit-scrollbar{
+        width: 5px;
+    }
+    }
+    @media(max-width: 459px){
+    .container .content .category{
+        flex-direction: column;
+    }
+    }
+
+    @media screen and (max-width: 1000px){
+        .container{
+            grid-gap: 5rem;
+        }
+        form{
+            width: 350px;
+        }
+        .popupcontent{
+        height: 500px;
+        width: 200px;
+    }
+
+    @media screen and (max-width: 1000px){
+        .login-content h2{
+            font-size: 1.5rem;
+            margin: 8px 0;
+        }
+        .img img{
+            width: 400px;
+        }
+    }
+
+    @media screen and (max-width: 900px){
+        .container{
+            grid-template-columns: 1fr;
+            margin-top:0;
+
+        }
+
+        .img{
+            display: none;
+        }
+
+        .wave{
+            display: none;
+        }
+
+        .login-content{
+            justify-content: center;
+        }
+    }
 </style>
 
 <x-app-layout>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Visitor Request') }}
-        </h2>
-        </x-slot>
-
-<body class="antialiased">
-           
-    <div class="top-container">
+<body>
+        <img class="wave" src="images/wave.png">
+	<div class="container-h">
 		<div class="img">
 			<img src="images/bg.png">
 		</div>
+        <div class="login-content">
+        <div class="container">
+    <br>
+    <div class="title">Visitor Request Form</div>
+    <div class="content">
 
-      <div class="forms-container">
-        <div class="left-container">
-          <div class="left-form">
-          <br><br><br>
 
     {{-- User Info --}}
-    <h2 class="name">Visitor Request Form</h2>  
         {{-- <div class="row">
             Name : {{ Auth::user()->fname }}
                     {{ Auth::user()->mname }}

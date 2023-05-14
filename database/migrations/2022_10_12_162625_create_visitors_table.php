@@ -15,11 +15,15 @@ return new class extends Migration
     {
         Schema::create('visitors', function (Blueprint $table) {
             $table->id();
-            $table->string('nameOfOwner')->nullable();
             $table->string('nameOfVisitor')->nullable();
+            $table->string('contactNumber')->nullable();
+            $table->string('gender')->nullable();
             $table->date('dateOfVisit')->nullable();
             $table->string('purposeOfVisit')->nullable();
+            $table->string('nameToVisit')->nullable();
             $table->string('roomToVisit')->nullable();
+            $table->string('vaccinedose')->nullable();
+            $table->string('vaccine')->nullable();
             $table->timestamps();
         });
     }

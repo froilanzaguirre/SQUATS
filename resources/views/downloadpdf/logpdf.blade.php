@@ -1,12 +1,12 @@
+
+<h2 class="text-dark text-xl ml-4">INCIDENT LOGS</h2>
 <table id="docTable" class="table table-striped">
     <thead>
         <tr>
-            <th>User ID</th>
+            <th>Date</th>
             <th>User Type</th>
             <th>Name</th>
-            <th>Gender</th>
             <th>Contact Number</th>
-            <th>Date</th>
             <th>Purpose</th>
             <th>Room Owner</th>
             <th>Room Number</th>
@@ -16,19 +16,17 @@
     </thead>
     <tbody>
         @foreach ($loginformation as $loginfo)
-            <tr>
-                <th scope="row">{{ $loginfo->userid }}</th>
-                <td>{{ $loginfo->usertype }}</td>
-                <td>{{ $loginfo->name }}</td>
-                <td>{{ $loginfo->gender }}</td>
-                <td>{{ $loginfo->contactNumber }}</td>
-                <td>{{ $loginfo->dateOfVisit }}</td>
-                <td>{{ $loginfo->purposeOfVisit }}</td>
-                <td>{{ $loginfo->nameToVisit }}</td>
-                <td>{{ $loginfo->roomToVisit }}</td>
-                <td>{{ $loginfo->created_at }}</td>
-                <td>{{ $loginfo->timeout }}</td>
-            </tr>
+        <tr>
+        <td>{{ $loginfo->dayin }}</td>
+        <td>{{ $loginfo->usertype }}</td>
+        <td>{{ $loginfo->name }}</td>
+        <td>{{ $loginfo->contactNumber }}</td>
+        <td>{{ $loginfo->purposeOfVisit }}</td>
+        <td>{{ $loginfo->nameToVisit }}</td>
+        <td>{{ $loginfo->roomToVisit }}</td>
+        <td>{{ $loginfo->timein }}</td>
+        <td>{{ $loginfo->timeout }}</td>
+        </tr>
         @endforeach
     </tbody>
 </table>
@@ -44,6 +42,11 @@
     #docTable th {
         border: 1px solid #ddd;
         padding: 8px;
+    }
+    h2{
+        font-size: 1.5rem;
+        font-weight: normal;
+        color:black;
     }
 
     #docTable tr:nth-child(even) {

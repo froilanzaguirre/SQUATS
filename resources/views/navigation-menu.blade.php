@@ -6,14 +6,14 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                    <img src="/images/squats-logo.png" width="50" height="50">
                     </a>
                 </div>
 
                 {{-- Visitor --}}
                 @if(Auth::user()->usertype === 'Visitor')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('userQR') }}" :active="request()->routeIs('userQR')">
+                    <x-jet-nav-link href="{{ route('userQR.create') }}" :active="request()->routeIs('userQR.create')">
                         {{ __('Visitor QR') }}
                     </x-jet-nav-link>
                 </div>
@@ -26,16 +26,35 @@
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('visitorRequest') }}" :active="request()->routeIs('visitorRequest')">
+                    <x-jet-nav-link href="{{ route('userQR.create') }}" :active="request()->routeIs('userQR.create')">
                         {{ __('Visitor Request') }}
                     </x-jet-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('visitorapproval') }}" :active="request()->routeIs('visitorapproval')">
+                        {{ __('Your Visitors') }}
+                    </x-jet-nav-link>
+                </div>
+
+                {{-- Staff --}}
+                @elseif(Auth::user()->usertype === 'Staff')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('scanQR') }}" :active="request()->routeIs('scanQR')">
+                        {{ __('QR Code Scanner') }}
+                    </x-jet-nav-link>
+                </div>
+
 
                 {{-- Admin --}}
                 @elseif(Auth::user()->usertype === 'Admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('admindashboard') }}" :active="request()->routeIs('admindashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Admin Dashboard') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -174,26 +193,40 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+        <div class="pt-1 pb-1 space-y-1">
+        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+        <div class="pt-1 pb-1 space-y-1">
+        {{-- Resident --}}
+                @if(Auth::user()->usertype === 'Resident')
+                <x-jet-responsive-nav-link href="{{ route('admindashboard') }}" :active="request()->routeIs('admindashboard')">
                 {{ __('Dashboard') }}
-            </x-jet-responsive-nav-link>
-        </div>
+                </x-jet-responsive-nav-link>
 
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('userQR.create') }}" :active="request()->routeIs('userQR')">
-                {{ __('User Information') }}
-            </x-jet-responsive-nav-link>
-        </div>
+                <x-jet-responsive-nav-link href="{{ route('userQR.create') }}" :active="request()->routeIs('userQR.create')">
+                    {{ __('Vistor Request Form') }}
+                </x-jet-responsive-nav-link>
+        
+                <x-jet-responsive-nav-link href="{{ route('visitorapproval') }}" :active="request()->routeIs('visitorapproval')">
+                    {{ __('Your Visitors') }}
+                </x-jet-responsive-nav-link>
 
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('scanQR') }}" :active="request()->routeIs('scanQR')">
-                {{ __('QR Code Scanner') }}
-            </x-jet-responsive-nav-link>
+                {{-- Staff --}}
+                @elseif(Auth::user()->usertype === 'Staff')
+                    <x-jet-responsive-nav-link href="{{ route('staffresidentlist') }}" :active="request()->routeIs('staffresidentlist')">
+                    {{ __('Resident Qr Code') }}
+                    </x-jet-responsive-nav-link>
+
+                    <x-jet-responsive-nav-link href="{{ route('scanQR') }}" :active="request()->routeIs('scanQR')">
+                    {{ __('Qr Code Scanner') }}
+                    </x-jet-responsive-nav-link>
+
+                @endif
+    
+        </div>
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
+        <div class="pt-1 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 mr-3">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\ExpectedVisitor;
 use Session;
 
 class QRCodeController extends Controller
@@ -12,30 +13,36 @@ class QRCodeController extends Controller
 
     public function create()
     {
-        $users_id = DB::table('users')->latest()->first();
+        $users = DB::table('expected_visitor')->latest()->first();
 
-        return view('profile.userQR', ['qrid' => $users_id->id]);
+        return view('profile.userQR', ['qrid' => $users->id, 'qrname' => $users->nameOfVisitor, 'qrusertype' => 'Visitor'] );
     }
 
-    public function store(Request $request, User $user)
+    public function store($id, Request $request, User $user)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'gender' => $request->gender,
-            'contactNumber' => $request->contactNumber,
-            'dateOfVisit' => $request->dateOfVisit,
-            'purposeOfVisit' => $request->purposeOfVisit,
-            'nameToVisit' => $request->nameToVisit,
-            'roomToVisit' => $request->roomToVisit,
-            'vaccinedose' => $request->vaccinedose,
-            'usertype' => 'Visitor',
-        ]);
+        $visitor = ExpectedVisitor::find($id);
+        // dd($visitor);
+        if (User::find($id) == NULL){
+            $user = User::create([
+                'id' => $visitor->id,
+                'name' => $visitor->nameOfVisitor,
+                'gender' => $visitor->gender,
+                'contactNumber' => $visitor->contactNumber,
+                'dateOfVisit' => $visitor->dateOfVisit,
+                'purposeOfVisit' => $visitor->purposeOfVisit,
+                'nameToVisit' => $visitor->nameToVisit,
+                'roomToVisit' => $visitor->roomToVisit,
+                'vaccinedose' => $visitor->vaccinedose,
+                'vaccine' => $visitor->vaccine,
+                'usertype' => 'Visitor',
+            ]);
+            
+            $visitor->status = "Approved";
+            $visitor->save();
 
-        if (request()->hasFile('vaccine')) {
-            $vaccine = request()->file('vaccine')->getClientOriginalName();
-            request()->file('vaccine')->move('vaccines', '\user_' . $user->id . '_vaccine_' . $vaccine, '');
-            $user->update(['vaccine' => ('\vaccines' . '\user_' . $user->id . '_vaccine_' . $vaccine)]);
+        } elseif (($visitor->id == User::find($id)->id)){
+            $visitor->status = "Approved";
+            $visitor->save();
         }
 
         return back()->with('generated', ['qrid' => $user->id]);
